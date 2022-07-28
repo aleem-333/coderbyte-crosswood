@@ -4,7 +4,7 @@
             <b-form-input
                 v-model="name"
                 :value="name"
-                @change="$emit('update-option-name', name, index)"
+                @keyup="$emit('update-option-name', name, index)"
                 placeholder="Enter your multiple choice option"
                 class="bg-dark-500 border-dark text-light"
             ></b-form-input>
@@ -15,10 +15,10 @@
                     name="correct"
                     v-model="correct"
                     class="bg-dark-500 border-dark d-inline text-light"
+                    @change="$emit('update-correct-answer', index)"
                 ></b-form-radio>
             <b-button type="button" variant="success" class="ms-2" v-if="action == 'add' || action == 'both'" @click="$emit('add-row')">+</b-button>
             <b-button type="button" variant="danger" class="ms-2" v-if="action == 'remove' || action == 'both'" @click="$emit('remove-row', index)">-</b-button>
-            <!-- add radio input -->
         </div>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
         addRow() {
             console.log('add row option', this);
             this.$parent.addOptionRow;
-        }
+        },
     },
     mounted() {
         this.name = this.text;

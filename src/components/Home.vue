@@ -1,7 +1,7 @@
 <template>
   <div class="row w-100 m-0 p-2 bg-dark-500">
-    <form-widget class="col-md-6 p-2"></form-widget>
-    <preview-widget class="col-md-6 p-2"></preview-widget>
+    <form-widget @sendQuestion="recieveQuestion" class="col-md-6 p-2"></form-widget>
+    <preview-widget :form="form" class="col-md-6 p-2"></preview-widget>
   </div>
 </template>
 
@@ -12,6 +12,20 @@ import PreviewWidget from './PreviewWidget.vue'
 export default {
   components: { FormWidget, PreviewWidget },
   name: 'HomeComponent',
+  data() {
+    return {
+      form: {},
+    };
+  },
+  methods: {
+    recieveQuestion(form) {
+      this.form = {
+        question: form.question,
+        options: form.options,
+        correctAnswer: form.correctAnswer,
+      };
+    }
+  }
 }
 </script>
 <style scoped>
